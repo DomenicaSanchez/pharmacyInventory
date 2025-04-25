@@ -1,0 +1,34 @@
+---
+import remove from "../assets/remove.png";
+const { id } = Astro.props;
+console.log("ID desde props:", id);
+---
+
+<div class="inline-block relative">
+  <button class="p-1 remove-btn" data-id={id}>
+    <img src={remove.src} class="h-6 w-6" />
+  </button>
+</div>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".remove-btn");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", async (event) => {
+        const button = event.currentTarget;
+        const id = button.getAttribute("data-id");
+        const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+          method: "DELETE",
+        });
+        if (res.ok) {
+          location.reload();
+        } else {
+          const text = await res.text();
+          console.error("Error del servidor:", text);
+          alert("No se pudo borrar el producto.");
+        }
+      });
+    });
+  });
+</script>

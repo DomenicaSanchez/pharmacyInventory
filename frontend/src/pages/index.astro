@@ -1,0 +1,20 @@
+---
+import Table from '../components/Table.astro';
+import TableAdd from '../components/TableAdd.astro';
+import Layout from '../layouts/Layout.astro';
+
+const res = await fetch('http://localhost:3000/api/products');
+const products = await res.json();
+
+---
+
+<Layout > 
+	<div class ="max-w-5xl mx-auto mt-10 "> 
+		<Table products={products}/>
+	</div>
+
+	<div class="max-w-5xl mx-auto mt-10">
+		<TableAdd />
+	</div>
+
+</Layout>

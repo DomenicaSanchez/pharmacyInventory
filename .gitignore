@@ -1,0 +1,16 @@
+# Frontend (Astro)
+frontend/node_modules/
+frontend/.astro/
+
+# Backend (Node/Express)
+backend/node_modules/
+backend/.env
+
+
+# OS & IDEs
+*.swp
+*.swo
+*.bak
+*.tmp
+.vscode/
+.idea/

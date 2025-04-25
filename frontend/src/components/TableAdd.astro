@@ -1,0 +1,123 @@
+---
+const formId = `form-${Math.random().toString(36).slice(2)}`;
+---
+
+<div>
+  <form
+    id={formId}
+    onsubmit={`event.preventDefault(); (async () => {
+      const code = document.querySelector('#code-${formId}').value.trim();
+      const name = document.querySelector('#name-${formId}').value.trim();
+      const stock = parseInt(document.querySelector('#stock-${formId}').value);
+      const price = parseFloat(document.querySelector('#price-${formId}').value);
+      const exp = document.querySelector('#exp-${formId}').value;
+
+      if (!code || !name || isNaN(stock) || isNaN(price) || !exp) {
+        alert('Por favor completa todos los campos correctamente.');
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:3000/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code, name, stock, price, exp }),
+        });
+
+        if (res.ok) {
+          location.reload(); // o mostrar un mensaje si no querés recargar
+        } else {
+          alert("No se pudo agregar el producto.");
+        }
+      } catch (err) {
+        alert("Error de red.");
+        console.error(err);
+      }
+    })()`}
+  >
+    <table class="bg-white shadow rounded-md mx-auto">
+      <tbody>
+        <tr>
+          <td class="p-3 block">
+            Code
+            <input
+              id={`code-${formId}`}
+              type="text"
+              class="w-full px-2 py-1 rounded"
+            />
+          </td>
+          <td class="p-3">
+            Nombre
+            <input
+              id={`name-${formId}`}
+              type="text"
+              class="w-full px-2 py-1 rounded"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="p-3">
+            Stock
+            <input
+              id={`stock-${formId}`}
+              type="number"
+              min="0"
+              class="w-full px-2 py-1 rounded"
+            />
+          </td>
+          <td class="p-3">
+            Precio
+            <input
+              id={`price-${formId}`}
+              type="number"
+              min="0.01"
+              step="0.01"
+              class="w-full px-2 py-1 rounded"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="p-3" colspan="2">
+            Fecha de vencimiento
+            <input
+              id={`exp-${formId}`}
+              type="date"
+              class="px-2 py-1 rounded w-full"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="p-3 text-center" colspan="2">
+            <button type="submit"> Guardar </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<style>
+  td {
+    color: #adadad;
+    font-weight: bold;
+    font-family: "Trebuchet MS";
+  }
+
+  input {
+    border: 1px solid #ccc;
+    font-weight: normal;
+    color: black;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  button {
+    background-color: #243751;
+    font-weight: bold;
+    font-family: "Trebuchet MS";
+    color: white;
+    padding: 10px 40px;
+    border-radius: 4px;
+  }
+</style>

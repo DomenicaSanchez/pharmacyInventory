@@ -1,0 +1,64 @@
+---
+import rest from "../assets/rest.png";
+
+const { id } = Astro.props;
+const showFormId = `form-${Math.random().toString(36).slice(2)}`;
+---
+
+<div class="inline-block relative">
+  <button
+    type="button"
+    onclick={`document.getElementById('${showFormId}').classList.toggle('hidden')`}
+    class="p-1"
+  >
+    <img src={rest.src} class="h-6 w-6" />
+  </button>
+
+  <div
+    id={showFormId}
+    class="absolute z-10 mt-2 right-0 bg-white rounded shadow-md p-2 w-48 hidden"
+  >
+    <form
+      onsubmit={`event.preventDefault(); (async () => {
+    const input = document.querySelector('#input-${showFormId}');
+    const cantidad = parseInt(input.value);
+    if (isNaN(cantidad) || cantidad <= 0) return;
+
+    try {
+      const res = await fetch('http://localhost:3000/api/products/${id}', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ res: cantidad }),
+      });
+      if (res.ok) {
+        location.reload();
+      } else {
+        alert("No se pudo actualizar el producto.");
+      }
+    } catch (err) {
+      alert("Error de red.");
+      console.error(err);
+    }
+
+    input.value = '';
+    document.getElementById('${showFormId}').classList.add('hidden');
+  })()`}
+    >
+      <label class="block mb-2">
+        Cantidad:
+        <input
+          id={`input-${showFormId}`}
+          type="number"
+          min="1"
+          class="mt-1 block w-full border border-gray-300 rounded px-2 py-1 text-sm"
+        />
+        <button
+          type="submit"
+          class="mt-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 shadow-md"
+        >
+          Restar
+        </button>
+      </label>
+    </form>
+  </div>
+</div>
