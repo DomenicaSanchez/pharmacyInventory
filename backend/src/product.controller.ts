@@ -1,42 +1,54 @@
 import { Request, Response } from "express";
 import * as Product from "./product.model";
 
+const formatDate = (date: Date) => {
+  return new Date(date).toISOString().split("T")[0];
+};
+
 export const getAllProducts = async (req: Request, res: Response) => {
-  const products = await Product.getAllProducts();
+  try {
+    const products = await Product.getAllProducts();
+    const formattedProducts = products.map((product) => ({
+      ...product,
+      exp: formatDate(product.exp),
+    }));
 
-  products.forEach((product) => {
-    product.exp = new Date(product.exp).toISOString().split("T")[0];
-  });
-
-  res.json(products);
+    res.json(formattedProducts);
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err });
+  }
 };
 
-export const getProductById = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
-  const id = parseInt(req.params.id);
-  const product = await Product.getProductById(id);
-  if (!product) {
-    return res.status(404).json({ message: "Product not found" });
-  }
+export const getProductById = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const product = await Product.getProductById(id);
 
-  product.exp = new Date(product.exp).toISOString().split("T")[0];
-  return res.json(product);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const formattedProduct = { ...product, exp: formatDate(product.exp) };
+    res.json(formattedProduct);
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err });
+  }
 };
 
-export const getProductByName = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
-  const name = req.params.name;
-  const product = await Product.getProductByName(name);
-  if (!product) {
-    return res.status(404).json({ message: "Product not found" });
-  }
+export const getProductByName = async (req: Request, res: Response) => {
+  try {
+    const name = req.params.name;
+    const product = await Product.getProductByName(name);
 
-  product.exp = new Date(product.exp).toISOString().split("T")[0];
-  return res.json(product);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const formattedProduct = { ...product, exp: formatDate(product.exp) };
+    res.json(formattedProduct);
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err });
+  }
 };
 
 export const createProduct = async (req: Request, res: Response) => {
