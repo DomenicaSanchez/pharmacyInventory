@@ -1,20 +1,25 @@
 ---
-import Table from '../components/Table.astro';
-import TableAdd from '../components/TableAdd.astro';
-import Layout from '../layouts/Layout.astro';
+import Table from "../components/Table.astro";
+import TableAdd from "../components/TableAdd.astro";
+import Layout from "../layouts/Layout.astro";
 
-const res = await fetch('http://localhost:3000/api/products');
-const products = await res.json();
+let products = [];
 
+if (!import.meta.env.SSR) {
+  const API_URL = import.meta.env.PUBLIC_API_URL || "http://localhost:3000";
+  const res = await fetch(`${API_URL}/api/products`);
+  products = await res.json();
+} else {
+  products = [];
+}
 ---
 
-<Layout > 
-	<div class ="max-w-5xl mx-auto mt-10 "> 
-		<Table products={products}/>
-	</div>
+<Layout>
+  <div class="max-w-5xl mx-auto mt-10">
+    <Table products={products} />
+  </div>
 
-	<div class="max-w-5xl mx-auto mt-10">
-		<TableAdd />
-	</div>
-
+  <div class="max-w-5xl mx-auto mt-10">
+    <TableAdd />
+  </div>
 </Layout>

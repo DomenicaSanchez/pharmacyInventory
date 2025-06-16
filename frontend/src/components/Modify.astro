@@ -3,6 +3,7 @@ import modify from "../assets/modify.png";
 
 const { id } = Astro.props;
 const showFormId = `form-${Math.random().toString(36).slice(2)}`;
+const API_URL = import.meta.env.PUBLIC_API_URL || "http://localhost:3000";
 ---
 
 <div class="inline-block relative">
@@ -30,7 +31,7 @@ const showFormId = `form-${Math.random().toString(36).slice(2)}`;
         if (expInput.value) body.exp = expInput.value;
 
         try {
-          const res = await fetch('http://localhost:3000/api/products/${id}', {
+          const res = await fetch('${API_URL}/api/products/${id}', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),

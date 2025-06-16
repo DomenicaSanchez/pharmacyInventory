@@ -8,6 +8,9 @@ export default defineConfig({
   devToolbar: { enabled: false },
   integrations: [react()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    define: {
+      'process.env.PUBLIC_API_URL': JSON.stringify(process.env.PUBLIC_API_URL),
+    },
   }
 });

@@ -30,7 +30,6 @@ cd pharmy
 ```bash
 cd backend
 npm install
-npm run dev
 ```
 
 Añadir el archivo .env con la URL de Railway:
@@ -67,3 +66,13 @@ npm run dev
 - **Express:** Framework minimalista para Node.js.
 - **Prisma:** ORM moderno para TypeScript y PostgreSQL.
 - **Railway:** Plataforma para desplegar bases de datos en la nube.
+
+## 🐳 Uso con Docker
+Se incluyen archivos Dockerfile para frontend y backend, además de un archivo docker-compose.yml para levantar ambos servicios juntos.
+### Construir y levantar contenedores
+```bash
+docker-compose build
+docker-compose up -d
+```
+- El backend estará disponible en http://localhost:3002
+- El frontend en http://localhost:8082

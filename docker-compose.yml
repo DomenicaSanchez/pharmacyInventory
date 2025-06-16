@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3002:3000"   
+    environment:
+      - DATABASE_URL="postgresql://postgres:vipaVWeMZJTlrcrecFjBgUDzUVKpqaSG@shortline.proxy.rlwy.net:16775/railway"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8082:80"    
+    depends_on:
+      - backend
+    restart: unless-stopped
