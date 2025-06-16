@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-RUN npx prisma generate     # <-- aquí generas el cliente Prisma
+RUN npx prisma generate   
 RUN npm run build
 
 # 2. Production image

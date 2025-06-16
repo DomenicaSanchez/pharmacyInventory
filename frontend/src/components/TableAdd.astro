@@ -1,6 +1,6 @@
 ---
 const formId = `form-${Math.random().toString(36).slice(2)}`;
-const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.PUBLIC_API_URL || "http://localhost:3000";
 ---
 
 <div>
@@ -11,7 +11,8 @@ const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
       const name = document.querySelector('#name-${formId}').value.trim();
       const stock = parseInt(document.querySelector('#stock-${formId}').value);
       const price = parseFloat(document.querySelector('#price-${formId}').value);
-      const exp = document.querySelector('#exp-${formId}').value;
+      const exp = new Date(document.querySelector('#exp-${formId}').value).toISOString();
+
 
       if (!code || !name || isNaN(stock) || isNaN(price) || !exp) {
         alert('Por favor completa todos los campos correctamente.');
