@@ -1,63 +1,8 @@
 ---
-import type { Product } from "../types/Product.ts";
-import plus from "../assets/plus.png";
-import rest from "../assets/rest.png";
-import modify from "../assets/modify.png";
-import remove from "../assets/remove.png";
+import React from "react";
+import ListProduct from "./ListProduct.jsx";
 
-import Plus from "../components/Plus.astro";
-import Remove from "./Remove.astro";
-import Rest from "./Rest.astro";
-import Modify from "./Modify.astro";
-
-const { products } = Astro.props;
-
-
+const { products, onEdit, onView } = Astro.props;
 ---
 
-<div>
-  <table class="min-w-full bg-white shadow rounded-md">
-    <thead class="text-center">
-      <tr>
-        <th class="p-3">Code</th>
-        <th>Name</th>
-        <th>Stock</th>
-        <th>Price</th>
-        <th>Expires</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody class="text-center">
-      {
-        products.map((p: Product) => (
-          <tr class="hover:bg-gray-50">
-            <td class="p-3">{p.code}</td>
-            <td>{p.name}</td>
-            <td>{p.stock}</td>
-            <td>${Number(p.price).toFixed(2)}</td>
-            <td>{new Date(p.exp).toLocaleDateString()}</td>
-            <td class="p-5 text-center space-x-2"> 
-              <Plus id={p.id} />
-              <Modify id={p.id} />
-              <Remove id={p.id}/>
-              <Rest id={p.id}/>
-            </td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
-</div>
-
-<style>
-  th {
-    color: #adadad;
-    font-weight: bold;
-    font-family: "Trebuchet MS";
-  }
-
-  td {
-    color: #000000;
-    font-family: "Trebuchet MS";
-  }
-</style>
+<ListProduct products={products} onEdit={onEdit} onView={onView} client:load />

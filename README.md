@@ -2,7 +2,7 @@
 
 Aplicación sencilla de inventario para farmacia, desarrollada con:
 
-- **Frontend:** [Astro](https://astro.build) + TailwindCSS
+- **Frontend:** [Astro](https://astro.build) + TailwindCSS + React
 - **Backend:** Node.js + Express + TypeScript
 - **Base de datos:** PostgreSQL (Railway)
 
@@ -63,7 +63,7 @@ npm run dev
 ## 🧪 Tecnologías utilizadas
 
 - **Astro:** Framework moderno para frontend.
-- **TailwindCSS:** Utilidades CSS para estilos rápidos.
+- **TailwindCSS y React:** Utilidades CSS para estilos rápidos.
 - **Express:** Framework minimalista para Node.js.
 - **Prisma:** ORM moderno para TypeScript y PostgreSQL.
 - **Railway:** Plataforma para desplegar bases de datos en la nube.
