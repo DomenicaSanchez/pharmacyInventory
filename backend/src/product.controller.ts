@@ -58,7 +58,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<any> => {
   const id = parseInt(req.params.id);
   const product = await Product.updateProduct(id, req.body);

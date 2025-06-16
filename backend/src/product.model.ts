@@ -43,7 +43,7 @@ export const updateProduct = async (
     exp?: Date;
     sum?: number;
     res?: number;
-  }
+  },
 ) => {
   const product = await getProductById(id);
   if (!product) throw new Error("Product not found");
@@ -63,7 +63,7 @@ export const updateProduct = async (
       stock:
         data.sum !== undefined || data.res !== undefined
           ? newStock
-          : data.stock ?? product.stock,
+          : (data.stock ?? product.stock),
     },
   });
 };
