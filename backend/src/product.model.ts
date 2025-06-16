@@ -43,7 +43,7 @@ export const updateProduct = async (
     exp?: Date;
     sum?: number;
     res?: number;
-  },
+  }
 ) => {
   const product = await getProductById(id);
   if (!product) throw new Error("Product not found");
@@ -53,6 +53,10 @@ export const updateProduct = async (
   if (data.sum !== undefined) newStock += data.sum;
   if (data.res !== undefined) newStock -= data.res;
 
+  if (newStock < 0) {
+    throw new Error("Stock no puede ser negativo");
+  }
+
   return await prisma.product.update({
     where: { id },
     data: {
@@ -60,10 +64,7 @@ export const updateProduct = async (
       name: data.name ?? product.name,
       price: data.price ?? product.price,
       exp: data.exp ?? product.exp,
-      stock:
-        data.sum !== undefined || data.res !== undefined
-          ? newStock
-          : (data.stock ?? product.stock),
+      stock: newStock,
     },
   });
 };
