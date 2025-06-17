@@ -14,7 +14,8 @@ export default function SubtractQuantity({ id, onUpdated }) {
     e.preventDefault();
 
     const cantidad = parseInt(quantity);
-    if (isNaN(cantidad) || cantidad <= 0) return alert("Ingresa una cantidad válida");
+    if (isNaN(cantidad) || cantidad <= 0)
+      return alert("Ingresa una cantidad válida");
 
     setLoading(true);
 
@@ -43,7 +44,11 @@ export default function SubtractQuantity({ id, onUpdated }) {
   return (
     <div className="inline-block relative">
       <button type="button" onClick={toggleForm} className="p-1">
-        <img src={rest.default || rest.src || rest.url || rest} alt="Modificar" className="h-6 w-6" />
+        <img
+          src={rest.default || rest.src || rest.url || rest}
+          alt="Modificar"
+          className="h-6 w-6"
+        />
       </button>
 
       {showForm && (

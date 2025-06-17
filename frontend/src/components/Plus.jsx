@@ -14,7 +14,8 @@ export default function AddQuantity({ id, onUpdated }) {
     e.preventDefault();
 
     const cantidad = parseInt(quantity);
-    if (isNaN(cantidad) || cantidad <= 0) return alert("Ingresa una cantidad válida");
+    if (isNaN(cantidad) || cantidad <= 0)
+      return alert("Ingresa una cantidad válida");
 
     setLoading(true);
 
@@ -42,7 +43,11 @@ export default function AddQuantity({ id, onUpdated }) {
   return (
     <div className="inline-block relative">
       <button type="button" onClick={toggleForm} className="p-1">
-        <img src={plus.default || plus.src || plus.url || plus} alt="Sumar stock" className="h-6 w-6"/>
+        <img
+          src={plus.default || plus.src || plus.url || plus}
+          alt="Sumar stock"
+          className="h-6 w-6"
+        />
       </button>
 
       {showForm && (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import modify from "../assets/modify.png";
 
 const API_URL = import.meta.env.PUBLIC_API_URL || "http://localhost:3000";
@@ -47,7 +47,11 @@ export default function Modify({ id, onUpdated }) {
   return (
     <div className="inline-block relative">
       <button type="button" onClick={toggleForm} className="p-1">
-        <img src={modify.default || modify.src || modify.url || modify} alt="Modificar" className="h-6 w-6" />
+        <img
+          src={modify.default || modify.src || modify.url || modify}
+          alt="Modificar"
+          className="h-6 w-6"
+        />
       </button>
 
       {showForm && (

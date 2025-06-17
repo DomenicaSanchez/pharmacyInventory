@@ -38,7 +38,12 @@ export default function RemoveProduct({ id, onRemoved }) {
         disabled={loading}
         aria-label="Eliminar producto"
       >
-        <img src={remove.default || remove.src || remove.url || remove} alt="Eliminar" className="h-6 w-6" style={{ opacity: loading ? 0.5 : 1 }} />
+        <img
+          src={remove.default || remove.src || remove.url || remove}
+          alt="Eliminar"
+          className="h-6 w-6"
+          style={{ opacity: loading ? 0.5 : 1 }}
+        />
       </button>
     </div>
   );
