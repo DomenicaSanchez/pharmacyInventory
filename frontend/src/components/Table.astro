@@ -8,60 +8,63 @@ import Modify from "./Modify.astro";
 let products: Product[] = [];
 
 try {
-  const res = await fetch(`${import.meta.env.PUBLIC_API_URL || "http://localhost:3000"}/api/products`);
+  const res = await fetch(
+    `${import.meta.env.PUBLIC_API_URL || "http://localhost:3000"}/api/products`
+  );
   products = await res.json();
 } catch (err) {
   console.error("❌ Error cargando productos:", err);
 }
 ---
 
-<div>
-  <table class="min-w-full bg-white shadow rounded-md">
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
     <thead class="text-center">
       <tr>
-        <th class="p-3">Code</th>
-        <th>Name</th>
-        <th>Stock</th>
-        <th>Price</th>
-        <th>Expires</th>
-        <th>Actions</th>
+        {
+          ["Code", "Name", "Stock", "Price", "Expires", "Actions"].map(
+            (header) => (
+              <th class="px-4 py-3 text-sm font-bold text-gray-500 font-trebuchet">
+                {header}
+              </th>
+            )
+          )
+        }
       </tr>
     </thead>
-    <tbody class="text-center">
-      {products.length > 0 ? (
-        products.map((p: Product) => (
-          <tr class="hover:bg-gray-50">
-            <td class="p-3">{p.code}</td>
-            <td>{p.name}</td>
-            <td>{p.stock}</td>
-            <td>${Number(p.price).toFixed(2)}</td>
-            <td>{new Date(p.exp).toLocaleDateString()}</td>
-            <td class="p-5 text-center space-x-2">
-              <Plus id={p.id} />
-              <Modify id={p.id} />
-              <Remove id={p.id} />
-              <Rest id={p.id} />
+    <tbody class="text-center divide-y divide-gray-200">
+      {
+        products.length > 0 ? (
+          products.map((p: Product) => (
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="p-3">{p.code}</td>
+              <td>{p.name}</td>
+              <td>{p.stock}</td>
+              <td>${Number(p.price).toFixed(2)}</td>
+              <td>{new Date(p.exp).toLocaleDateString()}</td>
+              <td class="p-3 space-x-2 flex justify-center items-center">
+                <Plus id={p.id} />
+                <Modify id={p.id} />
+                <Remove id={p.id} />
+                <Rest id={p.id} />
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colspan="6" class="p-4 text-gray-500 italic">
+              No hay productos disponibles.
             </td>
           </tr>
-        ))
-      ) : (
-        <tr>
-          <td colspan="6" class="p-3 text-gray-500">No products available</td>
-        </tr>
-      )}
+        )
+      }
     </tbody>
   </table>
 </div>
 
 <style>
-  th {
-    color: #adadad;
-    font-weight: bold;
-    font-family: "Trebuchet MS";
-  }
-
+  th,
   td {
-    color: #000000;
-    font-family: "Trebuchet MS";
-  }z
+    font-family: "Trebuchet MS", sans-serif;
+  }
 </style>
