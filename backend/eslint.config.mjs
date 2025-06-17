@@ -1,12 +1,10 @@
-import eslint from "eslint";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
-import { ESLint } from "eslint";
 import path from "path";
 import { fileURLToPath } from "url";
 
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import prettierPlugin from "eslint-plugin-prettier";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,11 +24,13 @@ export default {
   },
   plugins: {
     "@typescript-eslint": tsPlugin,
-    "prettier": eslintPluginPrettierRecommended,
+    "prettier": prettierPlugin,
   },
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+  ],
   rules: {
     "no-console": ["warn", { allow: ["warn", "error", "log"] }],
-    ...tsPlugin.configs["recommended"].rules,
-    ...eslintPluginPrettierRecommended.rules,
   },
 };
