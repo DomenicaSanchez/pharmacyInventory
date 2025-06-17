@@ -1,4 +1,4 @@
-name: Node Lints
+name: Node Lint
 run-name: Lint backend y frontend
 
 on: [push]
