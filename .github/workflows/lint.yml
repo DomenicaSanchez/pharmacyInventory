@@ -1,0 +1,35 @@
+name: Node Lint
+run-name: Lint backend y frontend
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: [self-hosted]
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      # Backend
+      - name: Instalar dependencias backend
+        working-directory: ./backend
+        run: npm install
+
+      - name: Ejecutar Linter backend
+        working-directory: ./backend
+        run: npm run lint
+
+      # Frontend
+      - name: Instalar dependencias frontend
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Ejecutar Linter frontend
+        working-directory: ./frontend
+        run: npm run lint
