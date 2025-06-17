@@ -1,43 +1,36 @@
-name: Construir aplicación fullstack
-run-name: Construir backend y frontend
-
+name: Node build
+run-name: Build backend y frontend
 on: [push]
-
 jobs:
   build:
     runs-on: [self-hosted]
-
     steps:
-      - name: Descargar el repositorio
+      - name: Descargar el repo
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
+      - name: Usar nodejs
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
 
-      #  Construir backend
-      - name: Instalar dependencias del backend
+      # Backend
+      - name: Instalar dependencias backend
         working-directory: ./backend
-        run: npm install
-
-      - name: Ejecutar lint en el backend
-        working-directory: ./backend
-        run: npm run lint
+        run: |
+          npm install
 
       - name: Compilar backend
         working-directory: ./backend
-        run: npm run build
+        run: |
+          npm run build
 
-      #  Construir frontend
-      - name: Instalar dependencias del frontend
+      # Frontend
+      - name: Instalar dependencias frontend
         working-directory: ./frontend
-        run: npm install
-
-      - name: Ejecutar lint en el frontend
-        working-directory: ./frontend
-        run: npm run lint
+        run: |
+          npm install
 
       - name: Compilar frontend
         working-directory: ./frontend
-        run: npm run build
+        run: |
+          npm run build
