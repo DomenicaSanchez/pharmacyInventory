@@ -53,6 +53,14 @@ npm run dev
 
 ### 3. Configurar frontend
 
+Añadir el archivo .env con la URL donde correra el app:
+
+```bash
+PUBLIC_API_URL=http://localhost:3000
+```
+
+Iniciar el servidor
+
 ```bash
 cd ../frontend
 npm install
@@ -68,11 +76,15 @@ npm run dev
 - **Railway:** Plataforma para desplegar bases de datos en la nube.
 
 ## 🐳 Uso con Docker
+
 Se incluyen archivos Dockerfile para frontend y backend, además de un archivo docker-compose.yml para levantar ambos servicios juntos.
+
 ### Construir y levantar contenedores
+
 ```bash
 docker-compose build
 docker-compose up -d
 ```
+
 - El backend estará disponible en http://localhost:3002
 - El frontend en http://localhost:8082
