@@ -16,7 +16,7 @@ export default tseslint.config(
         ...globals.node,
       },
       parserOptions: {
-        project: ["./backend/tsconfig.eslint.json"], // Ruta desde la raíz del repo
+        project: ["./tsconfig.eslint.json"], 
         tsconfigRootDir: new URL('.', import.meta.url).pathname,
       }
 
