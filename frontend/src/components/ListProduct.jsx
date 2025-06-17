@@ -8,7 +8,7 @@ export default function ListProduct({ products: initialProducts = [], onEdit, on
   const [products, setProducts] = useState(initialProducts);
   const [loading, setLoading] = useState(initialProducts.length === 0);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(3);
 
   useEffect(() => {
     // Solo fetch si no se pasaron productos
@@ -100,7 +100,7 @@ export default function ListProduct({ products: initialProducts = [], onEdit, on
         count={products.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        labelRowsPerPage="Filas por página:"
+        labelRowsPerPage="Filas por pg:"
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         sx={{ fontFamily: "'Trebuchet MS', sans-serif" }}
