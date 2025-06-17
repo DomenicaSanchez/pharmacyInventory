@@ -37,7 +37,7 @@ describe("createProduct", () => {
 
 describe("updateProduct", () => {
   it("debería lanzar error si el stock queda negativo", async () => {
-    const product = await getProductById(1);
+    const product = await getProductById(4);
     await expect(updateProduct(product!.id, { res: 999 })).rejects.toThrow(
       "Stock no puede ser negativo",
     );
