@@ -14,22 +14,22 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
+          node-version: "22.x"
 
       # Backend
       - name: Instalar dependencias backend
         working-directory: ./backend
         run: npm install
 
-      - name: Ejecutar Linter backend
+      - name: Ejecutar Linter con fix en backend
         working-directory: ./backend
-        run: npm run lint
+        run: npm run lint:fix
 
       # Frontend
       - name: Instalar dependencias frontend
         working-directory: ./frontend
         run: npm install
 
-      - name: Ejecutar Linter frontend
+      - name: Ejecutar Linter con fix en frontend
         working-directory: ./frontend
-        run: npm run lint
+        run: npm run lint:fix
