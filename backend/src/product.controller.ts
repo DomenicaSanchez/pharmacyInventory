@@ -21,7 +21,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 export const getProductById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const id = parseInt(req.params.id);
@@ -41,7 +41,7 @@ export const getProductById = async (
 
 export const getProductByName = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const name = req.params.name;
@@ -66,7 +66,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<any> => {
   const id = parseInt(req.params.id);
   const product = await Product.updateProduct(id, req.body);

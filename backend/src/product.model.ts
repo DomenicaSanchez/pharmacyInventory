@@ -43,7 +43,7 @@ export const updateProduct = async (
     exp?: Date;
     sum?: number;
     res?: number;
-  }
+  },
 ) => {
   const product = await getProductById(id);
   if (!product) throw new Error("Product not found");
